@@ -17,20 +17,25 @@ class EntryForm extends Component {
     this.state = {
       goalResults: this.initialGoalResults(),
     };
-    console.log(this.state);
+  }
+  setSelectedValueForGoal(goal, value) {
+    const goalResults = { ...this.state.goalResults, [goal.id]: value };
+    this.setState({ goalResults });
   }
   initialGoalResults() {
-    console.log('blah hey goals', this.goals);
     return this.goals.reduce((acc, goal) => {
-      console.log('blah goal', goal);
-      acc = acc || {}
       acc[goal.id] = 0;
       return acc;
-    });
+    }, {});
   }
   renderGoalEntryInputs() {
     return this.goals.map((goal) => {
-      return <GoalEntryInput key={goal.id} goal={goal} selectedValue={this.state.goalResults[goal.id]} />;
+      return (<GoalEntryInput
+        key={goal.id}
+        goal={goal}
+        selectedValue={this.state.goalResults[goal.id]}
+        selectValue={this.setSelectedValueForGoal.bind(this)}
+      />);
     });
   }
   render() {

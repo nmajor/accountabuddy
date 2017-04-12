@@ -21,7 +21,8 @@ class GoalEntryInput extends Component {
     }
   }
   renderOption(value, style, activeStyle) {
-    const { optionStyle, baseActiveStyle } = styles;
+    const { selectedValue, goal } = this.props;
+    const { optionStyle, baseActiveStyle, touchableStyle } = styles;
     let { optionTextStyle } = styles;
 
     style = {
@@ -29,7 +30,7 @@ class GoalEntryInput extends Component {
       ...style,
     };
 
-    if (value === this.props.selectedValue) {
+    if (value === selectedValue) {
       activeStyle = { ...baseActiveStyle, ...activeStyle };
       style = { ...style, ...activeStyle };
 
@@ -38,7 +39,10 @@ class GoalEntryInput extends Component {
 
     return (
       <View style={style} onPress={() => { console.log('blah pressed'); }}>
-        <TouchableOpacity style={{ flex: 1, justifyContent: 'center' }}>
+        <TouchableOpacity
+          style={touchableStyle}
+          onPress={() => { this.props.selectValue(goal, value); }}
+        >
           <Text style={optionTextStyle}>{this.renderValueLabel(value)}</Text>
         </TouchableOpacity>
       </View>
@@ -128,6 +132,10 @@ const styles = {
   },
   baseActiveStyle: {
     borderRightWidth: 0,
+  },
+  touchableStyle: {
+    flex: 1,
+    justifyContent: 'center',
   },
 };
 
