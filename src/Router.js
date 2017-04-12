@@ -22,13 +22,13 @@ const RouterComponent = () => {
       navigationBarStyle={navBarStyle}
       titleStyle={navBarTitleStyle}
     >
-      <Scene key="home" component={Home} title="Accountabuddy" initial />
+      <Scene key="home" component={Home} title="Accountabuddy" />
       <Scene key="entries" component={Entries} title="Accountabuddy" />
       <Scene key="settings" component={Settings} title="Accountabuddy" />
       <Scene key="stats" component={Stats} title="Accountabuddy" />
       <Scene key="welcome" component={Welcome} title="Accountabuddy" />
       <Scene key="signIn" component={SignIn} title="Accountabuddy" />
-      <Scene key="editGoals" component={EditGoals} title="Accountabuddy" />
+      <Scene key="editGoals" component={EditGoals} title="Accountabuddy" initial />
     </Router>
   );
 };
