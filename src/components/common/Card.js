@@ -65,7 +65,7 @@ const styles = {
   },
   buttonStyle: {
     backgroundColor: primaryColor,
-    height: 40,
+    height: 50,
     justifyContent: 'center',
     borderBottomLeftRadius: 4,
     borderBottomRightRadius: 4,
@@ -73,6 +73,9 @@ const styles = {
   buttonTextStyle: {
     color: '#FFF',
     textAlign: 'center',
+    fontFamily: 'Helvetica',
+    fontWeight: '300',
+    fontSize: 18,
   },
   touchableStyle: {
     flex: 1,

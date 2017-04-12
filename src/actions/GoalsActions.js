@@ -8,7 +8,7 @@ import {
 export const createGoal = (goal) => {
   return {
     type: ADD_GOAL,
-    payload: { ...goal, id: shortid.generate() },
+    payload: { ...goal, id: shortid.generate(), createdAt: new Date() },
   };
 };
 

@@ -115,9 +115,9 @@ const styles = {
     borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    shadowColor: '#DDD',
+    shadowColor: '#CCC',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 1,
+    shadowOpacity: 0.5,
   },
   optionStyle: {
     flex: 1,
@@ -131,7 +131,7 @@ const styles = {
     textAlign: 'center',
   },
   baseActiveStyle: {
-    borderRightWidth: 0,
+    // borderRightWidth: 0,
   },
   touchableStyle: {
     flex: 1,
