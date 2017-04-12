@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createEntry } from '../actions';
 import Card from './common/Card';
 import GoalEntryInput from './GoalEntryInput';
 
@@ -6,45 +8,53 @@ class EntryForm extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.goals = [
-      { id: 1, text: 'Sensible portions' },
-      { id: 2, text: 'No sugary drinks' },
-      { id: 3, text: '1/4 carbs or less' },
-      { id: 4, text: '2 glasses of water' },
-      { id: 5, text: 'No beer' },
-    ];
-
     this.state = {
-      goalResults: this.initialGoalResults(),
+      entryResults: this.initialEntryResults(),
     };
   }
   setSelectedValueForGoal(goal, value) {
-    const goalResults = { ...this.state.goalResults, [goal.id]: value };
-    this.setState({ goalResults });
+    const entryResults = { ...this.state.entryResults, [goal.id]: value };
+    this.setState({ entryResults });
   }
-  initialGoalResults() {
-    return this.goals.reduce((acc, goal) => {
+  initialEntryResults() {
+    return this.props.goals.reduce((acc, goal) => {
       acc[goal.id] = 0;
       return acc;
     }, {});
   }
+  submit() {
+    this.props.createEntry({ results: this.state.entryResults });
+    this.setState({ entryResults: this.initialEntryResults() })
+  }
   renderGoalEntryInputs() {
-    return this.goals.map((goal) => {
+    return this.props.goals.map((goal) => {
       return (<GoalEntryInput
         key={goal.id}
         goal={goal}
-        selectedValue={this.state.goalResults[goal.id]}
+        selectedValue={this.state.entryResults[goal.id]}
         selectValue={this.setSelectedValueForGoal.bind(this)}
       />);
     });
   }
   render() {
+    console.log('blah entries', this.props.entries);
     return (
-      <Card headerText="New Entry">
+      <Card
+        headerText="New Entry"
+        buttonText="Add Entry"
+        onButtonPress={this.submit.bind(this)}
+      >
         {this.renderGoalEntryInputs()}
       </Card>
     );
   }
 }
 
-export default EntryForm;
+const mapStateToProps = (state) => {
+  return {
+    goals: state.goals,
+    entries: state.entries,
+  };
+};
+
+export default connect(mapStateToProps, { createEntry })(EntryForm);

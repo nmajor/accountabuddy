@@ -28,7 +28,7 @@ const RouterComponent = () => {
       <Scene key="stats" component={Stats} title="Accountabuddy" />
       <Scene key="welcome" component={Welcome} title="Accountabuddy" />
       <Scene key="signIn" component={SignIn} title="Accountabuddy" />
-      <Scene key="editGoals" component={EditGoals} title="Accountabuddy" initial />
+      <Scene key="editGoals" component={EditGoals} title="Accountabuddy" />
     </Router>
   );
 };
