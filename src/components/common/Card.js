@@ -56,8 +56,9 @@ const styles = {
   headerStyle: {
     fontFamily: 'Helvetica',
     fontSize: 24,
-    marginBottom: 15,
-    padding: 15,
+    paddingTop: 15,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   bodyStyle: {
     padding: 15,
