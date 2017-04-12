@@ -5,7 +5,7 @@ import {
   HIDE_GOAL,
 } from '../actions/types';
 
-const INITIAL_STATE = [{ id: 'fdskl', text: 'No carbs' }, { id: '4829j', text: 'No sugary drinks' }];
+const INITIAL_STATE = [];
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
