@@ -75,8 +75,10 @@ class EntryCard extends Component {
     );
   }
   renderBody() {
+    const { bodyStyle } = styles;
+
     if (this.state.expanded) {
-      return <View style={{ paddingTop: 15 }}>{this.renderEntriesResults()}</View>;
+      return <View style={bodyStyle}>{this.renderEntriesResults()}</View>;
     }
   }
   render() {
@@ -133,6 +135,9 @@ const styles = {
   resultEntryStyle: {
     flexDirection: 'row',
     marginTop: 5,
+  },
+  bodyStyle: {
+    paddingTop: 15,
   },
 };
 
