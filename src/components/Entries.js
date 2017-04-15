@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
+import { ListView } from 'react-native';
 import { connect } from 'react-redux';
 import Container from './common/Container';
 import EntryCard from './EntryCard';
 
 class Entries extends Component {
-  renderEntries() {
-    return this.props.entries.map((entry) => {
-      return <EntryCard key={entry.id} entry={entry} />;
+  componentWillMount() {
+    this.createDataSource(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.createDataSource(nextProps);
+  }
+
+  createDataSource({ entries }) {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
     });
+
+    this.dataSource = ds.cloneWithRows(entries);
+  }
+  renderEntry(entry) {
+    return <EntryCard entry={entry} />;
   }
   render() {
-    console.log('blah ', this.props.entries);
-    console.log('blah ', this.props.goals);
     return (
       <Container sceneKey={this.props.sceneKey}>
-        {this.renderEntries()}
+        <ListView
+          enableEmptySections
+          dataSource={this.dataSource}
+          renderRow={this.renderEntry}
+        />
       </Container>
     );
   }

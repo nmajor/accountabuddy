@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity } from 'react-native';
 import * as styleVars from '../styleVars';
+import { historyCount } from '../config';
+import GoalHistory from './GoalHistory';
 
 class GoalEntryInput extends Component {
   // constructor(props, context) {
@@ -20,6 +23,23 @@ class GoalEntryInput extends Component {
         return null;
     }
   }
+  renderOptionBadge(value) {
+    const { optionBadgeStyle } = styles;
+    let { optionTextStyle } = styles;
+
+    if (value === 0) {
+      optionTextStyle = {
+        color: styleVars.notDark,
+        fontWeight: '600',
+      };
+    }
+
+    return (
+      <View style={optionBadgeStyle[value]}>
+        <Text style={optionTextStyle}>{this.renderValueLabel(value)}</Text>
+      </View>
+    );
+  }
   renderOption(value, style, activeStyle) {
     const { selectedValue, goal } = this.props;
     const { optionStyle, baseActiveStyle, touchableStyle } = styles;
@@ -30,12 +50,16 @@ class GoalEntryInput extends Component {
       ...style,
     };
 
+    let renderOptionBody = this.renderOptionBadge(value);
+
     if (value === selectedValue) {
       activeStyle = { ...baseActiveStyle, ...activeStyle };
       style = { ...style, ...activeStyle };
 
       optionTextStyle = { ...optionTextStyle, color: '#FFF' };
+      renderOptionBody = <Text style={optionTextStyle}>{this.renderValueLabel(value)}</Text>;
     }
+
 
     return (
       <View style={style}>
@@ -43,28 +67,25 @@ class GoalEntryInput extends Component {
           style={touchableStyle}
           onPress={() => { this.props.selectValue(goal, value); }}
         >
-          <Text style={optionTextStyle}>{this.renderValueLabel(value)}</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>{renderOptionBody}</View>
         </TouchableOpacity>
       </View>
     );
   }
   renderBadOption() {
     return this.renderOption(1, {
-      // backgroundColor: styleVars.badLight,
     }, {
       backgroundColor: styleVars.badDark,
     });
   }
   renderNuturalOption() {
     return this.renderOption(2, {
-      // backgroundColor: styleVars.nuturalLight,
     }, {
       backgroundColor: styleVars.nuturalDark,
     });
   }
   renderGoodOption() {
     return this.renderOption(3, {
-      // backgroundColor: styleVars.goodLight,
     }, {
       backgroundColor: styleVars.goodDark,
     });
@@ -72,7 +93,6 @@ class GoalEntryInput extends Component {
   renderNAOption() {
     return this.renderOption(0, {
       borderRightWidth: 0,
-      // backgroundColor: styleVars.notLight,
     }, {
       backgroundColor: styleVars.notDark,
     });
@@ -84,11 +104,12 @@ class GoalEntryInput extends Component {
       optionGroupStyle,
     } = styles;
 
-    const { goal } = this.props;
+    const { goal, recentEntries } = this.props;
 
     return (
       <View style={containerStyle}>
         <Text style={goalTextStyle}>{goal.text}</Text>
+        <GoalHistory goal={goal} entries={recentEntries} />
         <View style={optionGroupStyle}>
           {this.renderBadOption()}
           {this.renderNuturalOption()}
@@ -99,6 +120,14 @@ class GoalEntryInput extends Component {
     );
   }
 }
+
+const badgeStyle = {
+  width: 20,
+  height: 20,
+  borderRadius: 15,
+  alignItems: 'center',
+  justifyContent: 'center',
+};
 
 const styles = {
   containerStyle: {
@@ -127,9 +156,6 @@ const styles = {
     borderRightWidth: 1,
     borderColor: '#CCC',
   },
-  optionTextStyle: {
-    textAlign: 'center',
-  },
   baseActiveStyle: {
     // borderRightWidth: 0,
   },
@@ -137,6 +163,31 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
   },
+  optionBadgeStyle: {
+    1: {
+      ...badgeStyle,
+      backgroundColor: styleVars.badDark,
+    },
+    2: {
+      ...badgeStyle,
+      backgroundColor: styleVars.nuturalDark,
+    },
+    3: {
+      ...badgeStyle,
+      backgroundColor: styleVars.goodDark,
+    },
+  },
+  optionTextStyle: {
+    color: '#FFF',
+    fontSize: 14,
+    fontWeight: '600',
+  },
 };
 
-export default GoalEntryInput;
+const mapStateToProps = ({ entries }) => {
+  return {
+    recentEntries: entries.slice(Math.max(entries.length - historyCount, 1)),
+  };
+};
+
+export default connect(mapStateToProps)(GoalEntryInput);

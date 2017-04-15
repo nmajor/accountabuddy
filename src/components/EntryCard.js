@@ -14,6 +14,9 @@ class EntryCard extends Component {
       expanded: false,
     };
   }
+  // componentWillUpdate() {
+  //   LayoutAnimation.spring();
+  // }
   handlePress() {
     this.setState({ expanded: !this.state.expanded });
   }
@@ -35,7 +38,7 @@ class EntryCard extends Component {
     const { resultEntryStyle } = styles;
 
     return _.map(this.props.entry.results, (result, goalId) => {
-      const goal = _.find(this.props.goals, (goal) => { return goal.id === goalId; });
+      const goal = _.find(this.props.goals, (g) => { return g.id === goalId; });
 
       return (
         <View style={resultEntryStyle} key={goalId}>
@@ -48,11 +51,16 @@ class EntryCard extends Component {
   renderHeaderText() {
     const { headerTextStyle } = styles;
 
-    return <Text style={headerTextStyle}>{moment(this.props.entry.createdAt).format('lll')}</Text>;
+    return (<Text style={headerTextStyle}>
+      {moment(this.props.entry.createdAt).format('M/D/YY h:mm:ss a')}
+    </Text>);
   }
   renderHeader() {
     if (this.state.expanded) {
-      return this.renderHeaderText();
+      return (<View style={{ flexDirection: 'row' }}>
+        {this.renderHeaderText()}
+        <Text>{` - ${moment(this.props.entry.createdAt).fromNow()}`}</Text>
+      </View>);
     }
 
     return (
@@ -94,7 +102,8 @@ const badgeStyle = {
 
 const styles = {
   headerTextStyle: {
-    fontSize: 14,
+    fontFamily: 'Helvetica',
+    fontSize: 15,
     fontWeight: '600',
   },
   resultPreviewStyle: {
@@ -116,6 +125,7 @@ const styles = {
     },
   },
   resultPreviewText: {
+    fontFamily: 'Helvetica',
     color: '#FFF',
     fontSize: 14,
     fontWeight: '600',
