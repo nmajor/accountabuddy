@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import FooterIcon from './FooterIcon';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 class Footer extends Component {
   render() {
@@ -8,10 +9,26 @@ class Footer extends Component {
 
     return (
       <View style={footerStyle}>
-        <FooterIcon text="Home" onPress={() => { console.log('Home pressed'); }} active />
-        <FooterIcon text="Stats" onPress={() => { console.log('Stats pressed'); }} />
-        <FooterIcon text="Entries" onPress={() => { console.log('Entries pressed'); }} />
-        <FooterIcon text="Settings" onPress={() => { console.log('Settings pressed'); }} />
+        <FooterIcon
+          text="Home"
+          onPress={() => { Actions.home({ type: ActionConst.RESET }); }}
+          active={this.props.sceneKey === 'home'}
+        />
+        <FooterIcon
+          text="Stats"
+          onPress={() => { Actions.stats({ type: ActionConst.RESET }); }}
+          active={this.props.sceneKey === 'stats'}
+        />
+        <FooterIcon
+          text="Entries"
+          onPress={() => { Actions.entries({ type: ActionConst.RESET }); }}
+          active={this.props.sceneKey === 'entries'}
+        />
+        <FooterIcon
+          text="Settings"
+          onPress={() => { Actions.settings({ type: ActionConst.RESET }); }}
+          active={this.props.sceneKey === 'settings'}
+        />
       </View>
     );
   }

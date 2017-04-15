@@ -38,7 +38,7 @@ class GoalEntryInput extends Component {
     }
 
     return (
-      <View style={style} onPress={() => { console.log('blah pressed'); }}>
+      <View style={style}>
         <TouchableOpacity
           style={touchableStyle}
           onPress={() => { this.props.selectValue(goal, value); }}

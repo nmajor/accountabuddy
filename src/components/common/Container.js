@@ -21,7 +21,7 @@ class Container extends Component {
           {this.props.children}
         </View>
         <View style={footerStyle}>
-          <Footer />
+          <Footer sceneKey={this.props.sceneKey} />
         </View>
       </View>
     );

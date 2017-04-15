@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
+import Container from './common/Container';
 
-class Home extends Component {
+class Stats extends Component {
   render() {
+    console.log('blah stats', this.props);
     return (
-      <View>
-        <Text>Hello</Text>
-      </View>
+      <Container sceneKey={this.props.sceneKey}>
+        <Text>Stats</Text>
+      </Container>
     );
   }
 }
 
-export default Home;
+export default Stats;

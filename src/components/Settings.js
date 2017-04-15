@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import Container from './common/Container';
+import RowCard from './common/RowCard';
+import { Actions } from 'react-native-router-flux';
 
-class Home extends Component {
+class Settings extends Component {
   render() {
     return (
-      <View>
-        <Text>Hello</Text>
-      </View>
+      <Container sceneKey={this.props.sceneKey}>
+        <RowCard text="Edit Goals" onPress={() => { Actions.editGoals(); }} />
+        <RowCard text="Remove Adds" />
+        <RowCard text="Log Out" />
+      </Container>
     );
   }
 }
 
-export default Home;
+export default Settings;

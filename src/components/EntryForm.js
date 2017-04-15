@@ -24,7 +24,7 @@ class EntryForm extends Component {
   }
   submit() {
     this.props.createEntry({ results: this.state.entryResults });
-    this.setState({ entryResults: this.initialEntryResults() })
+    this.setState({ entryResults: this.initialEntryResults() });
   }
   renderGoalEntryInputs() {
     return this.props.goals.map((goal) => {
@@ -37,7 +37,6 @@ class EntryForm extends Component {
     });
   }
   render() {
-    console.log('blah entries', this.props.entries);
     return (
       <Card
         headerText="New Entry"

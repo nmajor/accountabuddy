@@ -5,7 +5,7 @@ import EntryForm from './EntryForm';
 class Home extends Component {
   render() {
     return (
-      <Container>
+      <Container sceneKey={this.props.sceneKey}>
         <EntryForm />
       </Container>
     );
