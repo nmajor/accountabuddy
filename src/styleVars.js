@@ -1,6 +1,6 @@
 export const bgColor = '#F8F8F8';
-export const primaryColor = '#509CE3';
-export const primaryColorDark = '#4588C7';
+export const primaryColor = '#215E7F';
+export const primaryColorDark = '#1D506B';
 export const textColorLight = '#888888';
 
 export const badLight = '#FF785E';
