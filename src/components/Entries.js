@@ -12,6 +12,7 @@ class Entries extends Component {
 
     this.state = {
       date: new Date(),
+      dataSource: [],
     };
   }
   componentWillMount() {
@@ -19,9 +20,6 @@ class Entries extends Component {
   }
   componentWillReceiveProps(nextProps) {
     this.createDataSource(nextProps);
-  }
-  componentDidUpdate() {
-    this.createDataSource(this.props);
   }
   createDataSource({ entries }) {
     const ds = new ListView.DataSource({
@@ -33,10 +31,20 @@ class Entries extends Component {
       return new Date(entry.createdAt || undefined).toDateString() === dateString;
     });
 
-    this.dataSource = ds.cloneWithRows(filteredEntries);
+    this.setState({ dataSource: ds.cloneWithRows(filteredEntries) });
   }
-  nextDay() {}
-  prevDay() {}
+  nextDay() {
+    const d = this.state.date;
+    const newDate = new Date(d.setDate(d.getDate() + 1));
+    this.setState({ date: newDate });
+    this.createDataSource(this.props);
+  }
+  prevDay() {
+    const d = this.state.date;
+    const newDate = new Date(d.setDate(d.getDate() - 1));
+    this.setState({ date: newDate });
+    this.createDataSource(this.props);
+  }
   renderEntry(entry) {
     return <EntryCard entry={entry} />;
   }
@@ -60,7 +68,7 @@ class Entries extends Component {
     }
 
     return (
-      <TouchableOpacity onPress={this.nextDay} style={{ ...headerSharedStyle, flex: 1 }}>
+      <TouchableOpacity onPress={this.nextDay.bind(this)} style={{ ...headerSharedStyle, flex: 1 }}>
         <Text style={headerActionStyle}>{'>'}</Text>
       </TouchableOpacity>
     );
@@ -72,7 +80,7 @@ class Entries extends Component {
     } = styles;
 
     return (
-      <TouchableOpacity onPress={this.nextDay} style={{ ...headerSharedStyle, flex: 1 }}>
+      <TouchableOpacity onPress={this.prevDay.bind(this)} style={{ ...headerSharedStyle, flex: 1, width: 50 }}>
         <Text style={headerActionStyle}>{'<'}</Text>
       </TouchableOpacity>
     );
@@ -99,7 +107,7 @@ class Entries extends Component {
         {this.renderDateHeader()}
         <ListView
           enableEmptySections
-          dataSource={this.dataSource}
+          dataSource={this.state.dataSource}
           renderRow={this.renderEntry}
         />
       </Container>
@@ -127,11 +135,11 @@ const styles = {
     paddingBottom: 15,
   },
   headerActionStyle: {
+    textAlign: 'center',
     fontFamily: 'Helvetica',
     fontSize: 16,
     paddingTop: 15,
     paddingBottom: 15,
-    width: 50,
   },
 };
 

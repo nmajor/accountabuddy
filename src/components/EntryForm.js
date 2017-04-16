@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { createEntry } from '../actions';
 import Card from './common/Card';
 import GoalEntryInput from './GoalEntryInput';
@@ -23,8 +24,10 @@ class EntryForm extends Component {
     }, {});
   }
   submit() {
-    this.props.createEntry({ results: this.state.entryResults });
-    this.setState({ entryResults: this.initialEntryResults() });
+    if (_.some(this.state.entryResults, (value) => { return value !== 0; })) {
+      this.props.createEntry({ results: this.state.entryResults });
+      this.setState({ entryResults: this.initialEntryResults() });
+    }
   }
   renderGoalEntryInputs() {
     return this.props.goals.map((goal) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { historyCount } from '../config';
 import * as styleVars from '../styleVars';
 
@@ -17,7 +17,7 @@ class GoalHistory extends Component {
     paddedEntries.unshift.apply(paddedEntries, new Array(historyCount - entries.length));
 
     return paddedEntries.map((entry, index) => {
-      if (!entry) { return <View key={index} style={plainBadgeStyle} />; }
+      if (!entry || entry.results[goal.id] === undefined) { return <View key={index} style={badgeStyle} />; }
 
       return <View key={index}>{this.renderPlainOptionBadge(entry.results[goal.id])}</View>;
     });
@@ -28,7 +28,7 @@ class GoalHistory extends Component {
   }
 }
 
-const plainBadgeStyle = {
+const badgeStyle = {
   width: 15,
   height: 15,
   borderRadius: 10,
@@ -44,19 +44,19 @@ const styles = {
   },
   plainBadgeStyle: {
     0: {
-      ...plainBadgeStyle,
+      ...badgeStyle,
       backgroundColor: styleVars.notDark,
     },
     1: {
-      ...plainBadgeStyle,
+      ...badgeStyle,
       backgroundColor: styleVars.badDark,
     },
     2: {
-      ...plainBadgeStyle,
+      ...badgeStyle,
       backgroundColor: styleVars.nuturalDark,
     },
     3: {
-      ...plainBadgeStyle,
+      ...badgeStyle,
       backgroundColor: styleVars.goodDark,
     },
   },
