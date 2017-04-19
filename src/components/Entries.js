@@ -5,6 +5,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import Container from './common/Container';
 import EntryCard from './EntryCard';
+import Card from './common/Card';
 
 class Entries extends Component {
   constructor(props, context) {
@@ -27,11 +28,11 @@ class Entries extends Component {
     });
 
     const dateString = this.state.date.toDateString();
-    const filteredEntries = _.filter(entries, (entry) => {
+    this.filteredEntries = _.filter(entries, (entry) => {
       return new Date(entry.createdAt || undefined).toDateString() === dateString;
     });
 
-    this.setState({ dataSource: ds.cloneWithRows(filteredEntries) });
+    this.setState({ dataSource: ds.cloneWithRows(this.filteredEntries) });
   }
   nextDay() {
     const d = this.state.date;
@@ -101,15 +102,24 @@ class Entries extends Component {
       </View>
     );
   }
-  render() {
-    return (
-      <Container sceneKey={this.props.sceneKey}>
-        {this.renderDateHeader()}
+  renderList() {
+    if (this.filteredEntries.length > 0) {
+      return (
         <ListView
           enableEmptySections
           dataSource={this.state.dataSource}
           renderRow={this.renderEntry}
         />
+      );
+    }
+
+    return (<Card><Text>No entries for this day...</Text></Card>);
+  }
+  render() {
+    return (
+      <Container sceneKey={this.props.sceneKey}>
+        {this.renderDateHeader()}
+        {this.renderList()}
       </Container>
     );
   }
