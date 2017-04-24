@@ -1,3 +1,4 @@
+import initialState from '../initialState';
 import _ from 'lodash';
 import {
   ADD_GOAL,
@@ -5,9 +6,7 @@ import {
   HIDE_GOAL,
 } from '../actions/types';
 
-const INITIAL_STATE = [];
-
-export default (state = INITIAL_STATE, action) => {
+export default (state = initialState.goals, action) => {
   switch (action.type) {
     case ADD_GOAL:
       return [...state, action.payload];

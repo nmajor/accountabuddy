@@ -113,7 +113,7 @@ class Entries extends Component {
       );
     }
 
-    return (<Card><Text>No entries for this day...</Text></Card>);
+    return (<Card><Text style={{ textAlign: 'center' }}>No entries for this day...</Text></Card>);
   }
   render() {
     return (

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { primaryColor } from '../styleVars';
 import { createGoal, removeGoal, hideGoal } from '../actions';
 import Card from './common/Card';
 import GoalCard from './GoalCard';
@@ -13,6 +15,9 @@ class EditGoals extends Component {
     this.state = {
       textValue: '',
     };
+  }
+  onFinishedPress() {
+    Actions.home({ type: ActionConst.RESET });
   }
   handleTextChange(val) {
     this.setState({ textValue: val });
@@ -40,27 +45,46 @@ class EditGoals extends Component {
       );
     });
   }
+  renderFinishedButton() {
+    const {
+      buttonStyle,
+      touchableStyle,
+      buttonTextStyle,
+    } = styles;
+
+    if (this.props.goals.length > 0) {
+      return (
+        <View style={buttonStyle}>
+          <TouchableOpacity style={touchableStyle} onPress={this.onFinishedPress.bind(this)}>
+            <Text style={buttonTextStyle}>Finished</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  }
   render() {
-    // const { labelStyle, inputStyle } = styles;
     const { labelStyle, inputContainerStyle, inputStyle } = styles;
 
     return (
-      <View>
-        {this.renderGoals()}
-        <Card
-          buttonText="Submit"
-          onButtonPress={this.submitGoal.bind(this)}
-        >
-          <Text style={labelStyle}>Tell us a goal you have for each meal:</Text>
-          <View style={inputContainerStyle}>
-            <TextInput
-              placeholder="1/4 or less of carbs"
-              style={inputStyle}
-              value={this.state.textValue}
-              onChangeText={this.handleTextChange.bind(this)}
-            />
-          </View>
-        </Card>
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          {this.renderGoals()}
+          <Card
+            buttonText="Submit"
+            onButtonPress={this.submitGoal.bind(this)}
+          >
+            <Text style={labelStyle}>Tell us a goal you have for each meal:</Text>
+            <View style={inputContainerStyle}>
+              <TextInput
+                placeholder="1/4 or less of carbs"
+                style={inputStyle}
+                value={this.state.textValue}
+                onChangeText={this.handleTextChange.bind(this)}
+              />
+            </View>
+          </Card>
+        </View>
+        {this.renderFinishedButton()}
       </View>
     );
   }
@@ -84,6 +108,22 @@ const styles = {
     flex: 1,
     fontFamily: 'Helvetica',
     fontWeight: '100',
+  },
+  buttonStyle: {
+    justifyContent: 'center',
+    backgroundColor: primaryColor,
+    height: 50,
+  },
+  touchableStyle: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  buttonTextStyle: {
+    color: '#FFF',
+    textAlign: 'center',
+    fontFamily: 'Helvetica',
+    fontWeight: '300',
+    fontSize: 18,
   },
 };
 

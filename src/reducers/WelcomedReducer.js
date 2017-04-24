@@ -1,13 +1,13 @@
 import initialState from '../initialState';
 
 import {
-  ADD_ENTRY,
+  SET_WELCOMED,
 } from '../actions/types';
 
-export default (state = initialState.entries, action) => {
+export default (state = initialState.welcomed, action) => {
   switch (action.type) {
-    case ADD_ENTRY:
-      return [...state, action.payload];
+    case SET_WELCOMED:
+      return action.payload;
     default:
       return state;
   }
