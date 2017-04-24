@@ -42,7 +42,6 @@ class EntryForm extends Component {
   render() {
     return (
       <Card
-        headerText="New Entry"
         buttonText="Add Entry"
         onButtonPress={this.submit.bind(this)}
       >

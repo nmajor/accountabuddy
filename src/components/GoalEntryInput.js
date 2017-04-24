@@ -186,7 +186,7 @@ const styles = {
 
 const mapStateToProps = ({ entries }) => {
   return {
-    recentEntries: entries.slice(Math.max(entries.length - historyCount, 1)),
+    recentEntries: entries.slice(Math.max(entries.length - historyCount, 0)),
   };
 };
 
