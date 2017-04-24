@@ -52,7 +52,9 @@ class EditGoals extends Component {
       buttonTextStyle,
     } = styles;
 
-    if (this.props.goals.length > 0) {
+    const { goals, hideFinish } = this.props;
+
+    if (goals.length > 0 && !hideFinish) {
       return (
         <View style={buttonStyle}>
           <TouchableOpacity style={touchableStyle} onPress={this.onFinishedPress.bind(this)}>

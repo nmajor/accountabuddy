@@ -11,7 +11,7 @@ class Welcome extends Component {
   onButtonPress() {
     const { needsGoals } = this.props;
 
-    console.log('blah needsGoals', needsGoals);
+    this.props.setWelcomed(true);
 
     if (needsGoals) {
       Actions.newGoals({ type: ActionConst.RESET });

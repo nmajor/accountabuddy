@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { View, Text } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 // import { Scene, Router, Actions } from 'react-native-router-flux';
+import Loading from './components/Loading';
 import Home from './components/Home';
 import Entries from './components/Entries';
 import Settings from './components/Settings';
@@ -20,6 +21,14 @@ class RouterComponent extends Component {
       navBarTitleStyle,
     } = styles;
 
+    if (initialScene === null) {
+      return (
+        <View>
+          <Text>Loading</Text>
+        </View>
+      );
+    }
+
     return (
       <Router
         sceneStyle={{ paddingTop: 64 }}
@@ -27,14 +36,15 @@ class RouterComponent extends Component {
         titleStyle={navBarTitleStyle}
         leftButtonIconStyle={{ tintColor: '#FFF' }}
       >
+        <Scene key="loading" sceneStyle={{ paddingTop: 0 }} component={Loading} hideNavBar initial />
+        <Scene key="welcome" sceneStyle={{ paddingTop: 0 }} component={Welcome} hideNavBar />
         <Scene key="home" component={Home} title="Accountabuddy" />
         <Scene key="entries" component={Entries} title="Accountabuddy" />
         <Scene key="settings" component={Settings} title="Accountabuddy" />
         <Scene key="stats" component={Stats} title="Accountabuddy" />
         <Scene key="signIn" component={SignIn} title="Accountabuddy" />
-        <Scene key="newGoals" component={EditGoals} title="Goals" initial={initialScene === 'newGoals'} />
+        <Scene key="newGoals" component={EditGoals} title="Goals" />
         <Scene key="editGoals" component={EditGoals} title="Edit Goals" />
-        <Scene key="welcome" sceneStyle={{ paddingTop: 0 }} component={Welcome} hideNavBar initial={initialScene === 'welcome'} />
       </Router>
     );
   }
@@ -54,19 +64,4 @@ const styles = {
   },
 };
 
-const mapStateToProps = (state) => {
-  let initialScene = null;
-
-  if (!state.welcomed) {
-    initialScene = 'welcome';
-  } else if (state.goals.length === 0) {
-    initialScene = 'newGoals';
-  }
-
-  initialScene = 'welcome';
-
-
-  return { initialScene };
-};
-
-export default connect(mapStateToProps)(RouterComponent);
+export default RouterComponent;
