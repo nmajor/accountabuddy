@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import _ from 'lodash';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import Card from './common/Card';
 import { badDark, goodDark, nuturalDark, notDark } from '../styleVars';
+import { deleteEntry } from '../actions';
 
 class EntryCard extends Component {
   constructor(props, context) {
@@ -17,6 +18,19 @@ class EntryCard extends Component {
   // componentWillUpdate() {
   //   LayoutAnimation.spring();
   // }
+  onDeletePress() {
+    Alert.alert(
+      'Are you sure?',
+      'You are about to delete this entry. This cannot be undone.',
+      [
+        { text: 'Confirm', style: 'destructive', onPress: () => {
+          this.props.deleteEntry(this.props.entry.id);
+          this.setState({ expanded: false });
+        } },
+        { text: 'Cancel', onPress: () => {}, style: 'cancel' },
+      ],
+    );
+  }
   handlePress() {
     this.setState({ expanded: !this.state.expanded });
   }
@@ -81,13 +95,27 @@ class EntryCard extends Component {
       return <View style={bodyStyle}>{this.renderEntriesResults()}</View>;
     }
   }
+  renderActions() {
+    const { buttonStyle, buttonTextStyle, buttonTouchableStyle } = styles;
+
+    if (this.state.expanded) {
+      return (
+        <View style={buttonStyle}>
+          <TouchableOpacity style={buttonTouchableStyle} onPress={this.onDeletePress.bind(this)}>
+            <Text style={buttonTextStyle}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  }
   render() {
     return (
       <Card>
         <TouchableOpacity onPress={this.handlePress.bind(this)}>
           {this.renderHeader()}
-          {this.renderBody()}
         </TouchableOpacity>
+        {this.renderBody()}
+        {this.renderActions()}
       </Card>
     );
   }
@@ -139,6 +167,24 @@ const styles = {
   bodyStyle: {
     paddingTop: 15,
   },
+  buttonStyle: {
+    marginTop: 10,
+    height: 30,
+    justifyContent: 'center',
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+  },
+  buttonTextStyle: {
+    color: badDark,
+    textAlign: 'center',
+    fontFamily: 'Helvetica',
+    fontWeight: '300',
+    fontSize: 18,
+  },
+  buttonTouchableStyle: {
+    flex: 1,
+    justifyContent: 'center',
+  },
 };
 
 const mapStateToProps = (state) => {
@@ -148,4 +194,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps)(EntryCard);
+export default connect(mapStateToProps, { deleteEntry })(EntryCard);

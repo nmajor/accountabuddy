@@ -97,6 +97,13 @@ class GoalEntryInput extends Component {
       backgroundColor: styleVars.notDark,
     });
   }
+  renderGoalHistory() {
+    const { goal, recentEntries } = this.props;
+
+    if (this.props.recentEntries.length > 0) {
+      return <GoalHistory goal={goal} entries={recentEntries} />;
+    }
+  }
   render() {
     const {
       containerStyle,
@@ -104,12 +111,12 @@ class GoalEntryInput extends Component {
       optionGroupStyle,
     } = styles;
 
-    const { goal, recentEntries } = this.props;
+    const { goal } = this.props;
 
     return (
       <View style={containerStyle}>
         <Text style={goalTextStyle}>{goal.text}</Text>
-        <GoalHistory goal={goal} entries={recentEntries} />
+        {this.renderGoalHistory()}
         <View style={optionGroupStyle}>
           {this.renderBadOption()}
           {this.renderNuturalOption()}
