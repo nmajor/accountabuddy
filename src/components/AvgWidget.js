@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import _ from 'lodash';
 import { numOfEntriesForAverage } from '../config';
-import { computeGoalAverageFromEntries, entryValueHex } from '../helpers';
+import { computeAverageFromEntries, entryValueHex } from '../helpers';
 import { notLight } from '../styleVars';
 import Card from './common/Card';
 
-class StatsWidget extends Component {
+class AvgWidget extends Component {
   renderEntryAverage() {
     const { loudStyle, softStyle, labelStyle } = styles;
-    const averageScore = computeGoalAverageFromEntries(this.props.latestEntries);
+    const averageScore = computeAverageFromEntries(this.props.latestEntries);
 
     let scoreElement = <Text style={softStyle}>0</Text>;
 
@@ -28,7 +28,7 @@ class StatsWidget extends Component {
   }
   renderDayAverage() {
     const { loudStyle, softStyle, labelStyle } = styles;
-    const averageScore = computeGoalAverageFromEntries(this.props.dayEntries);
+    const averageScore = computeAverageFromEntries(this.props.dayEntries);
 
     let scoreElement = <Text style={softStyle}>0</Text>;
 
@@ -101,4 +101,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(StatsWidget);
+export default connect(mapStateToProps)(AvgWidget);

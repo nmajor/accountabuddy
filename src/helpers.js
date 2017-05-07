@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { badDark, nuturalDark, goodDark } from './styleVars';
 
-export const computeGoalAverageFromEntries = (entries) => {
+export const computeAverageFromEntries = (entries) => {
   if (entries.length === 0) { return null; }
 
   let results = _.map(entries, (entry) => {
@@ -16,6 +16,22 @@ export const computeGoalAverageFromEntries = (entries) => {
   const avg = (sum / results.length);
 
   return _.round(avg, 1);
+};
+
+export const computeGoalAveragesFromEntries = (entries) => {
+  const goalAvgs = {};
+
+  _.each(entries, (entry) => {
+    _.each(entry.results, (score, goalId) => {
+      goalAvgs[goalId] = (goalAvgs[goalId] || 0) + score;
+    });
+  });
+
+  _.each(goalAvgs, () => {})
+
+  return _.map(goalAvgs, (score, goalId) => {
+
+  });
 };
 
 function componentToHex(c) {
