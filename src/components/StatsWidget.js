@@ -1,32 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
+import _ from 'lodash';
 import { numOfEntriesForAverage } from '../config';
-import { computeGoalAverageFromEntries, percentageOfColor } from '../helpers';
+import { computeGoalAverageFromEntries, entryValueHex } from '../helpers';
+import { notLight } from '../styleVars';
 import Card from './common/Card';
 
 class StatsWidget extends Component {
-  renderDayAverage() {
-    const { loudStyle, labelStyle } = styles;
+  renderEntryAverage() {
+    const { loudStyle, softStyle, labelStyle } = styles;
     const averageScore = computeGoalAverageFromEntries(this.props.latestEntries);
 
-    percentageOfColor('#CC2C0E', '#FFDD37', 0.2);
+    let scoreElement = <Text style={softStyle}>0</Text>;
+
+    if (averageScore !== null) {
+      const textStyle = { ...loudStyle, color: entryValueHex(averageScore) };
+      scoreElement = <Text style={textStyle}>{averageScore}</Text>;
+    }
 
     return (
       <View>
-        <Text style={loudStyle}>{averageScore}</Text>
+        {scoreElement}
         <Text style={labelStyle}>Last {numOfEntriesForAverage} avg</Text>
       </View>
     );
   }
-  renderEntryAverage() {
-    const { loudStyle, labelStyle } = styles;
-    const averageScore = computeGoalAverageFromEntries(this.props.latestEntries);
+  renderDayAverage() {
+    const { loudStyle, softStyle, labelStyle } = styles;
+    const averageScore = computeGoalAverageFromEntries(this.props.dayEntries);
+
+    let scoreElement = <Text style={softStyle}>0</Text>;
+
+    if (averageScore !== null) {
+      const textStyle = { ...loudStyle, color: entryValueHex(averageScore) };
+      scoreElement = <Text style={textStyle}>{averageScore}</Text>;
+    }
 
     return (
       <View>
-        <Text style={loudStyle}>{averageScore}</Text>
-        <Text style={labelStyle}>Last {numOfEntriesForAverage} avg</Text>
+        {scoreElement}
+        <Text style={labelStyle}>Today's avg</Text>
       </View>
     );
   }
@@ -55,6 +69,13 @@ const styles = {
     fontSize: 65,
     fontWeight: '400',
   },
+  softStyle: {
+    textAlign: 'center',
+    fontFamily: 'Helvetica',
+    fontSize: 65,
+    fontWeight: '400',
+    color: notLight,
+  },
   labelStyle: {
     textAlign: 'center',
     fontFamily: 'Helvetica',
@@ -70,9 +91,13 @@ const styles = {
 
 const mapStateToProps = (state) => {
   const { entries } = state;
+  const today = new Date().toDateString();
 
   return {
-    latestEntries: entries.slice(Math.max(entries.length - numOfEntriesForAverage, 0)),
+    latestEntries: entries.slice(Math.max(entries.length - numOfEntriesForAverage, 0)) || [],
+    dayEntries: _.filter(entries, (e) => {
+      return new Date(e.createdAt || undefined).toDateString() === today;
+    }) || [],
   };
 };
 
