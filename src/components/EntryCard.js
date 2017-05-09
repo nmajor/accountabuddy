@@ -115,11 +115,13 @@ class EntryCard extends Component {
   }
   render() {
     return (
-      <Card>
-        <TouchableOpacity onPress={this.handlePress.bind(this)}>
-          {this.renderHeader()}
-        </TouchableOpacity>
-        {this.renderBody()}
+      <Card paddingless>
+        <View style={{ padding: 15 }}>
+          <TouchableOpacity onPress={this.handlePress.bind(this)}>
+            {this.renderHeader()}
+          </TouchableOpacity>
+          {this.renderBody()}
+        </View>
         {this.renderActions()}
       </Card>
     );
@@ -173,8 +175,10 @@ const styles = {
     paddingTop: 15,
   },
   buttonStyle: {
+    borderTopWidth: 1,
+    borderColor: '#CCC',
+    padding: 15,
     marginTop: 10,
-    height: 30,
     justifyContent: 'center',
     borderBottomLeftRadius: 4,
     borderBottomRightRadius: 4,

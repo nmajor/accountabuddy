@@ -10,7 +10,7 @@ class Settings extends Component {
   onDeleteAllEntriesPress() {
     Alert.alert(
       'Are you sure?',
-      'You are about to delete all your entries since the beginning of time!',
+      'You are about to\ delete all your entries since the beginning of time!',
       [
         { text: 'Confirm', style: 'destructive', onPress: () => {
           this.props.deleteAllEntries();
