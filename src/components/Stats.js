@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Container from './common/Container';
 import { primaryColor } from '../styleVars';
-import StatsAvgWidget from './StatsAvgWidget';
-import StatsGraphWidget from './StatsGraphWidget';
+import SummaryWidget from './SummaryWidget';
+import GoalHeatWidget from './GoalHeatWidget';
+// import StatsGraphWidget from './StatsGraphWidget';
 
 class Stats extends Component {
   constructor(props, context) {
@@ -64,8 +65,10 @@ class Stats extends Component {
     return (
       <Container sceneKey={this.props.sceneKey}>
         {this.renderHeader()}
-        <StatsAvgWidget entries={entries} />
-        <StatsGraphWidget entries={entries} />
+        <ScrollView style={{ flex: 1 }}>
+          <SummaryWidget entries={entries} days={this.state.days} />
+          <GoalHeatWidget entries={entries} days={this.state.days} />
+        </ScrollView>
       </Container>
     );
   }

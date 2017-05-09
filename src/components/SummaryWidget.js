@@ -8,7 +8,7 @@ import _ from 'lodash';
 // Avg socre per entry (last 3 days)
 // Entries per day ()
 
-class StatsAvgWidget extends Component {
+class SummaryWidget extends Component {
   renderRow(value, desc, style = {}) {
     const {
       rowContainerStyle,
@@ -89,4 +89,4 @@ const styles = {
   },
 };
 
-export default StatsAvgWidget;
+export default SummaryWidget;
