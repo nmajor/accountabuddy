@@ -47,7 +47,7 @@ class SummaryWidget extends Component {
       return sum + count;
     }, 0) / numOfDaysWithEntry;
 
-    return this.renderRow(value, 'Average entries per day', {
+    return this.renderRow(_.round(value, 1), 'Average entries per day', {
       rowContainerStyle: { borderBottomWidth: 0 },
       rowValueTextStyle: { color: '#333' },
     });
