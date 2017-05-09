@@ -20,7 +20,7 @@ class Stats extends Component {
   }
   getEntries() {
     const startingDay = new Date();
-    startingDay.setDate(startingDay.getDate() - 2);
+    startingDay.setDate(startingDay.getDate() - this.state.days);
     startingDay.setHours(0, 0, 0, 0);
 
     return _.filter(this.props.entries, (entry) => {
