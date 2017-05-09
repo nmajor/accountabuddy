@@ -24,7 +24,7 @@ class Home extends Component {
           <EntryForm />
           {this.renderAvgWidget()}
           {this.renderTopWidget()}
-          <View />
+          <View style={{ marginBottom: 15 }} />
         </ScrollView>
       </Container>
     );

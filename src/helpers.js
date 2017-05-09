@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { badDark, nuturalDark, goodDark } from './styleVars';
 
-export const computeAverageFromEntries = (entries) => {
+export const computeAverageFromEntries = (entries = []) => {
   if (entries.length === 0) { return null; }
 
   let results = _.map(entries, (entry) => {

@@ -7,11 +7,7 @@ class Footer extends Component {
   render() {
     const { footerStyle } = styles;
 
-    // <FooterIcon
-    //   text="Stats"
-    //   onPress={() => { Actions.stats({ type: ActionConst.RESET }); }}
-    //   active={this.props.sceneKey === 'stats'}
-    // />
+
 
     return (
       <View style={footerStyle}>
@@ -24,6 +20,11 @@ class Footer extends Component {
           text="Entries"
           onPress={() => { Actions.entries({ type: ActionConst.RESET }); }}
           active={this.props.sceneKey === 'entries'}
+        />
+        <FooterIcon
+          text="Stats"
+          onPress={() => { Actions.stats({ type: ActionConst.RESET }); }}
+          active={this.props.sceneKey === 'stats'}
         />
         <FooterIcon
           text="Settings"

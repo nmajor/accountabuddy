@@ -60,13 +60,11 @@ const styles = {
   },
   goalScoreWrapperStyle: {
     width: 40,
-    marginRight: 10,
     borderRightWidth: 1,
     borderColor: '#EEE',
     justifyContent: 'center',
   },
   goalScoreStyle: {
-    color: '#FFF',
     textAlign: 'center',
     fontSize: 16,
     fontFamily: 'Helvetica',
