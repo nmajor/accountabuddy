@@ -6,6 +6,7 @@ import Container from './common/Container';
 import { primaryColor } from '../styleVars';
 import SummaryWidget from './SummaryWidget';
 import GoalHeatWidget from './GoalHeatWidget';
+import GoalAvgWidget from './GoalAvgWidget';
 // import StatsGraphWidget from './StatsGraphWidget';
 
 class Stats extends Component {
@@ -68,6 +69,8 @@ class Stats extends Component {
         <ScrollView style={{ flex: 1 }}>
           <SummaryWidget entries={entries} days={this.state.days} />
           <GoalHeatWidget entries={entries} days={this.state.days} />
+          <GoalAvgWidget headerText="Avg per goal" entries={entries} />
+          <View style={{ marginBottom: 15 }} />
         </ScrollView>
       </Container>
     );

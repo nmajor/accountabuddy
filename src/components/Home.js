@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View } from 'react-native';
+import { numOfEntriesForAverage } from '../config';
 import Container from './common/Container';
 import EntryForm from './EntryForm';
 import AvgWidget from './AvgWidget';
-import TopWidget from './TopWidget';
+import GoalAvgWidget from './GoalAvgWidget';
 
 class Home extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.entries = this.getEntries(props);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.entriesPerDay = this.getEntries(nextProps);
+  }
+  getEntries(props) {
+    return props.entries.slice(Math.max(props.entries.length - numOfEntriesForAverage, 0)) || [];
+  }
   renderTopWidget() {
     if (this.props.goals.length > 1 && this.props.hasEntries) {
-      return <TopWidget />;
+      const headerText = `Avg last ${numOfEntriesForAverage} entries`;
+      return <GoalAvgWidget headerText={headerText} entries={this.entries} />;
     }
   }
   renderAvgWidget() {
@@ -34,6 +47,7 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     hasEntries: state.entries.length > 0,
+    entries: state.entries,
     goals: state.goals,
   };
 };

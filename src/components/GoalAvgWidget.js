@@ -6,10 +6,10 @@ import { numOfEntriesForAverage } from '../config';
 import { computeGoalAveragesFromEntries, entryValueHex } from '../helpers';
 import Card from './common/Card';
 
-class AvgWidget extends Component {
+class GoalAvgWidget extends Component {
   renderTopGoals() {
     const { rowStyle, goalScoreStyle, goalScoreWrapperStyle, goalTextStyle } = styles;
-    const goalAvgs = computeGoalAveragesFromEntries(this.props.latestEntries);
+    const goalAvgs = computeGoalAveragesFromEntries(this.props.entries);
 
     const orderedGoals = _.sortBy(this.props.goals, (goal) => {
       return goalAvgs[goal.id];
@@ -33,7 +33,7 @@ class AvgWidget extends Component {
 
     return (
       <Card paddingless>
-        <Text style={headerStyle}>Last {numOfEntriesForAverage} avg per goal</Text>
+        <Text style={headerStyle}>{this.props.headerText}</Text>
         {this.renderTopGoals()}
       </Card>
     );
@@ -50,7 +50,7 @@ const styles = {
     marginBottom: 15,
     textAlign: 'center',
     fontFamily: 'Helvetica',
-    fontWeight: '600',
+    fontWeight: '400',
   },
   rowStyle: {
     flexDirection: 'row',
@@ -79,12 +79,11 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { entries, goals } = state;
+  const { goals } = state;
 
   return {
     goals,
-    latestEntries: entries.slice(Math.max(entries.length - numOfEntriesForAverage, 0)) || [],
   };
 };
 
-export default connect(mapStateToProps)(AvgWidget);
+export default connect(mapStateToProps)(GoalAvgWidget);

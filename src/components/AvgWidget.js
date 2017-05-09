@@ -7,13 +7,13 @@ import BoxWidget from './common/BoxWidget';
 
 class AvgWidget extends Component {
   render() {
-    const dayAvgData = {
-      value: computeAverageFromEntries(this.props.dayEntries),
-      desc: 'Today\'s avg',
+    const entryAvgData = {
+      value: computeAverageFromEntries(this.props.latestEntries),
+      desc: `Last ${numOfEntriesForAverage} avg`,
       colorValue: true,
     };
 
-    const entryAvgData = {
+    const dayAvgData = {
       value: computeAverageFromEntries(this.props.dayEntries),
       desc: 'Today\'s avg',
       colorValue: true,
