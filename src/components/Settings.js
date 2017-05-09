@@ -19,13 +19,13 @@ class Settings extends Component {
       ],
     );
   }
+  // <RowCard text="Remove Adds" />
+  // <RowCard text="Log Out" />
   render() {
     return (
       <Container sceneKey={this.props.sceneKey}>
         <RowCard text="Edit Goals" onPress={() => { Actions.editGoals({ hideFinish: true }); }} />
         <RowCard text="Delete All Entries" onPress={this.onDeleteAllEntriesPress.bind(this)} />
-        <RowCard text="Remove Adds" />
-        <RowCard text="Log Out" />
       </Container>
     );
   }

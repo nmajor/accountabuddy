@@ -69,7 +69,7 @@ class Stats extends Component {
         <ScrollView style={{ flex: 1 }}>
           <SummaryWidget entries={entries} days={this.state.days} />
           <GoalHeatWidget entries={entries} days={this.state.days} />
-          <GoalAvgWidget headerText="Avg per goal" entries={entries} />
+          <GoalAvgWidget headerText="Avg Score Per Goal" entries={entries} />
           <View style={{ marginBottom: 15 }} />
         </ScrollView>
       </Container>

@@ -21,7 +21,7 @@ class Home extends Component {
   }
   renderTopWidget() {
     if (this.props.goals.length > 1 && this.props.hasEntries) {
-      const headerText = `Avg last ${numOfEntriesForAverage} entries`;
+      const headerText = `Avg of Last ${numOfEntriesForAverage} Entries`;
       return <GoalAvgWidget headerText={headerText} entries={this.entries} />;
     }
   }
