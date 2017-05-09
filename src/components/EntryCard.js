@@ -34,12 +34,17 @@ class EntryCard extends Component {
   handlePress() {
     this.setState({ expanded: !this.state.expanded });
   }
+  renderBadgeText(result) {
+    if (result === 0) { return null; }
+
+    return result;
+  }
   renderResultBadge(result) {
     const { resultPreviewStyle, resultPreviewText } = styles;
 
     return (
       <View style={resultPreviewStyle[result]}>
-        <Text style={resultPreviewText}>{result}</Text>
+        <Text style={resultPreviewText}>{this.renderBadgeText(result)}</Text>
       </View>
     );
   }

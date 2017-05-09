@@ -20,18 +20,20 @@ export const computeAverageFromEntries = (entries) => {
 
 export const computeGoalAveragesFromEntries = (entries) => {
   const goalAvgs = {};
+  const goalEntrySize = {};
 
   _.each(entries, (entry) => {
     _.each(entry.results, (score, goalId) => {
+      if (score !== 0) { goalEntrySize[goalId] = (goalEntrySize[goalId] || 0) + 1; }
       goalAvgs[goalId] = (goalAvgs[goalId] || 0) + score;
     });
   });
 
-  _.each(goalAvgs, () => {})
-
-  return _.map(goalAvgs, (score, goalId) => {
-
+  _.each(goalAvgs, (score, goalId) => {
+    goalAvgs[goalId] = _.round((goalAvgs[goalId] / goalEntrySize[goalId]), 1);
   });
+
+  return goalAvgs;
 };
 
 function componentToHex(c) {
@@ -100,5 +102,7 @@ export const entryValueHex = (val) => {
   } else if (val >= 2 && val < 3) {
     const percentage = _.round((val - 2), 1);
     return percentageOfColor(nuturalDark, goodDark, percentage);
+  } else if (val >= 2) {
+    return goodDark;
   }
 };

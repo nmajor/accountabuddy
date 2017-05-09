@@ -8,7 +8,7 @@ import TopWidget from './TopWidget';
 
 class Home extends Component {
   renderTopWidget() {
-    if (this.props.goals.length > 1) {
+    if (this.props.goals.length > 1 && this.props.hasEntries) {
       return <TopWidget />;
     }
   }
@@ -22,9 +22,9 @@ class Home extends Component {
       <Container sceneKey={this.props.sceneKey}>
         <ScrollView style={{ flex: 1 }}>
           <EntryForm />
-          {this.renderTopWidget()}
           {this.renderAvgWidget()}
-          <View style={{ marginBottom: 200 }} />
+          {this.renderTopWidget()}
+          <View />
         </ScrollView>
       </Container>
     );

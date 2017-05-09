@@ -25,10 +25,20 @@ class Card extends Component {
     }
   }
   render() {
+    const { containerStyle } = styles;
+    let { bodyStyle } = styles;
+
+    if (this.props.paddingless) {
+      bodyStyle = {
+        ...bodyStyle,
+        padding: 0,
+      };
+    }
+
     return (
-      <View style={styles.containerStyle}>
+      <View style={containerStyle}>
         {this.renderHeader()}
-        <View style={styles.bodyStyle}>
+        <View style={bodyStyle}>
           {this.props.children}
         </View>
         {this.renderButton()}
