@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, ScrollView, View, TextInput, TouchableOpacity } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -23,8 +23,10 @@ class EditGoals extends Component {
     this.setState({ textValue: val });
   }
   submitGoal() {
-    this.props.createGoal({ text: this.state.textValue });
-    this.setState({ textValue: '' });
+    if (this.state.textValue.length > 3) {
+      this.props.createGoal({ text: this.state.textValue });
+      this.setState({ textValue: '' });
+    }
   }
   removeGoal(id) {
     const { entries } = this.props;
@@ -68,7 +70,7 @@ class EditGoals extends Component {
     const { labelStyle, inputContainerStyle, inputStyle } = styles;
 
     return (
-      <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
           {this.renderGoals()}
           <Card
@@ -87,7 +89,7 @@ class EditGoals extends Component {
           </Card>
         </View>
         {this.renderFinishedButton()}
-      </View>
+      </ScrollView>
     );
   }
 }

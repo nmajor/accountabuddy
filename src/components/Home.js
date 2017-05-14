@@ -14,7 +14,7 @@ class Home extends Component {
     this.entries = this.getEntries(props);
   }
   componentWillReceiveProps(nextProps) {
-    this.entriesPerDay = this.getEntries(nextProps);
+    this.entries = this.getEntries(nextProps);
   }
   getEntries(props) {
     return props.entries.slice(Math.max(props.entries.length - numOfEntriesForAverage, 0)) || [];

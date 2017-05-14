@@ -17,14 +17,14 @@ class Footer extends Component {
           active={this.props.sceneKey === 'home'}
         />
         <FooterIcon
-          text="Entries"
-          onPress={() => { Actions.entries({ type: ActionConst.RESET }); }}
-          active={this.props.sceneKey === 'entries'}
-        />
-        <FooterIcon
           text="Stats"
           onPress={() => { Actions.stats({ type: ActionConst.RESET }); }}
           active={this.props.sceneKey === 'stats'}
+        />
+        <FooterIcon
+          text="Entries"
+          onPress={() => { Actions.entries({ type: ActionConst.RESET }); }}
+          active={this.props.sceneKey === 'entries'}
         />
         <FooterIcon
           text="Settings"

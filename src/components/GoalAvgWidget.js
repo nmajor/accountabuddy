@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import _ from 'lodash';
-import { numOfEntriesForAverage } from '../config';
 import { computeGoalAveragesFromEntries, entryValueHex } from '../helpers';
 import Card from './common/Card';
 
@@ -16,7 +15,7 @@ class GoalAvgWidget extends Component {
     });
 
     return _.map(orderedGoals, (goal) => {
-      const goalAvg = goalAvgs[goal.id];
+      const goalAvg = goalAvgs[goal.id] || 0;
 
       return (
         <View key={goal.id} style={rowStyle}>
