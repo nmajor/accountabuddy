@@ -17,13 +17,18 @@ class Stats extends Component {
     this.state = {
       days: 3,
     };
+
+    this.entries = this.getEntries(props);
   }
-  getEntries() {
+  componentWillReceiveProps(nextProps) {
+    this.entries = this.getEntries(nextProps);
+  }
+  getEntries(props) {
     const startingDay = new Date();
     startingDay.setDate(startingDay.getDate() - this.state.days);
     startingDay.setHours(0, 0, 0, 0);
 
-    return _.filter(this.props.entries, (entry) => {
+    return _.filter(props.entries, (entry) => {
       return new Date(entry.createdAt || undefined) > startingDay;
     });
   }
@@ -61,15 +66,13 @@ class Stats extends Component {
     );
   }
   render() {
-    const entries = this.getEntries();
-
     return (
       <Container sceneKey={this.props.sceneKey}>
         {this.renderHeader()}
         <ScrollView style={{ flex: 1 }}>
-          <SummaryWidget entries={entries} days={this.state.days} />
-          <GoalHeatWidget entries={entries} days={this.state.days} />
-          <GoalAvgWidget headerText="Avg Score Per Goal" entries={entries} />
+          <SummaryWidget entries={this.entries} days={this.state.days} />
+          <GoalHeatWidget entries={this.entries} days={this.state.days} />
+          <GoalAvgWidget headerText="Avg Score Per Goal" entries={this.entries} />
           <View style={{ marginBottom: 15 }} />
         </ScrollView>
       </Container>
