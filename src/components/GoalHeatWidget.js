@@ -22,8 +22,6 @@ class GoalHeatWidget extends Component {
       const day = new Date(entry.createdAt || undefined).toDateString();
       entriesPerDay[day] = entriesPerDay[day] || {};
       _.each(entry.results, (score, goalId) => {
-        console.log('blah 1', goalId);
-        console.log('blah 2', entriesPerDay[day]);
         entriesPerDay[day][goalId] = entriesPerDay[day][goalId] || {};
         if (score !== 0) {
           entriesPerDay[day][goalId].count = (entriesPerDay[day][goalId].count || 0) + 1;
