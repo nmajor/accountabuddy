@@ -10,11 +10,7 @@ class GoalAvgWidget extends Component {
     const { rowStyle, goalScoreStyle, goalScoreWrapperStyle, goalTextStyle } = styles;
     const goalAvgs = computeGoalAveragesFromEntries(this.props.entries);
 
-    const orderedGoals = _.sortBy(this.props.goals, (goal) => {
-      return goalAvgs[goal.id];
-    });
-
-    return _.map(orderedGoals, (goal) => {
+    return _.map(this.props.goals, (goal) => {
       const goalAvg = goalAvgs[goal.id] || 0;
 
       return (
