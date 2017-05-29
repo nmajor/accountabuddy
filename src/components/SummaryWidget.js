@@ -29,8 +29,9 @@ class SummaryWidget extends Component {
   renderAverage() {
     const { entries } = this.props;
     const averageScore = computeAverageFromEntries(entries);
+    const value = averageScore || 0;
 
-    return this.renderRow(averageScore, 'Average score');
+    return this.renderRow(value, 'Average score');
   }
   renderEntriesPerDay() {
     const { entries } = this.props;
@@ -43,13 +44,16 @@ class SummaryWidget extends Component {
 
     const numOfDaysWithEntry = Object.keys(entriesPerDay).length;
 
-    const value = _.reduce(entriesPerDay, (sum, count) => {
+    const numOfEntriesPerDay = _.reduce(entriesPerDay, (sum, count) => {
       return sum + count;
     }, 0) / numOfDaysWithEntry;
 
-    return this.renderRow(_.round(value, 1), 'Average entries per day', {
+    const value = numOfEntriesPerDay ? _.round(numOfEntriesPerDay, 1) : 0;
+    const rowValueTextStyle = value === 0 ? {} : { color: '#333' };
+
+    return this.renderRow(value, 'Average entries per day', {
       rowContainerStyle: { borderBottomWidth: 0 },
-      rowValueTextStyle: { color: '#333' },
+      rowValueTextStyle,
     });
   }
   render() {

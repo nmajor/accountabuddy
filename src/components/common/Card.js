@@ -25,6 +25,7 @@ class Card extends Component {
     }
   }
   render() {
+    const customStyle = this.props.style || {};
     const { containerStyle } = styles;
     let { bodyStyle } = styles;
 
@@ -36,7 +37,7 @@ class Card extends Component {
     }
 
     return (
-      <View style={containerStyle}>
+      <View style={{ ...customStyle, ...containerStyle }}>
         {this.renderHeader()}
         <View style={bodyStyle}>
           {this.props.children}

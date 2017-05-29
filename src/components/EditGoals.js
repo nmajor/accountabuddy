@@ -70,26 +70,29 @@ class EditGoals extends Component {
     const { labelStyle, inputContainerStyle, inputStyle } = styles;
 
     return (
-      <ScrollView style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
-          {this.renderGoals()}
-          <Card
-            buttonText="Submit"
-            onButtonPress={this.submitGoal.bind(this)}
-          >
-            <Text style={labelStyle}>Tell us a goal you have for each meal:</Text>
-            <View style={inputContainerStyle}>
-              <TextInput
-                placeholder="1/4 or less of carbs"
-                style={inputStyle}
-                value={this.state.textValue}
-                onChangeText={this.handleTextChange.bind(this)}
-              />
-            </View>
-          </Card>
-        </View>
+      <View style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ flex: 0 }} style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
+            {this.renderGoals()}
+            <Card
+              buttonText="Submit"
+              onButtonPress={this.submitGoal.bind(this)}
+              style={{ marginBottom: 15 }}
+            >
+              <Text style={labelStyle}>Tell us a goal you have for each meal:</Text>
+              <View style={inputContainerStyle}>
+                <TextInput
+                  placeholder="1/4 or less of carbs"
+                  style={inputStyle}
+                  value={this.state.textValue}
+                  onChangeText={this.handleTextChange.bind(this)}
+                />
+              </View>
+            </Card>
+          </View>
+        </ScrollView>
         {this.renderFinishedButton()}
-      </ScrollView>
+      </View>
     );
   }
 }
