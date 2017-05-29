@@ -17,20 +17,18 @@ class GoalHeatWidget extends Component {
   getEntriesPerDay(props) {
     const { entries } = props;
 
-    const entriesPerDay = {};
-    _.each(entries, (entry) => {
+    return _.reduce(entries, (acc, entry) => {
       const day = new Date(entry.createdAt || undefined).toDateString();
-      entriesPerDay[day] = entriesPerDay[day] || {};
+      acc[day] = acc[day] || {};
       _.each(entry.results, (score, goalId) => {
-        entriesPerDay[day][goalId] = entriesPerDay[day][goalId] || {};
+        acc[day][goalId] = acc[day][goalId] || {};
         if (score !== 0) {
-          entriesPerDay[day][goalId].count = (entriesPerDay[day][goalId].count || 0) + 1;
-          entriesPerDay[day][goalId].totalScore = (entriesPerDay[day][goalId].totalScore || 0) + score;
+          acc[day][goalId].count = (acc[day][goalId].count || 0) + 1;
+          acc[day][goalId].totalScore = (acc[day][goalId].totalScore || 0) + score;
         }
       });
-    });
-
-    return entriesPerDay;
+      return acc;
+    }, {});
   }
   renderGoalHeatBar(goal) {
     const { days } = this.props;

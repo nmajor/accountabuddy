@@ -18,19 +18,23 @@ class Stats extends Component {
       days: 3,
     };
 
-    this.entries = this.getEntries(props);
+    this.handleOptionClick = this.handleOptionClick.bind(this);
+    this.entries = this.getEntries(props, this.state);
   }
-  componentWillReceiveProps(nextProps) {
-    this.entries = this.getEntries(nextProps);
+  componentWillUpdate(nextProps, nextState) {
+    this.entries = this.getEntries(nextProps, nextState);
   }
-  getEntries(props) {
+  getEntries(props, state) {
     const startingDay = new Date();
-    startingDay.setDate(startingDay.getDate() - this.state.days);
+    startingDay.setDate(startingDay.getDate() - state.days);
     startingDay.setHours(0, 0, 0, 0);
 
     return _.filter(props.entries, (entry) => {
       return new Date(entry.createdAt || undefined) > startingDay;
     });
+  }
+  handleOptionClick(option) {
+    this.setState({ days: option });
   }
   renderOptionTextStyle(option) {
     const { headerOptionTextStyle, selectedHeaderOptionTextStyle } = styles;
@@ -49,7 +53,7 @@ class Stats extends Component {
     const { headerOptionStyle } = styles;
 
     return (
-      <TouchableOpacity key={option} onPress={() => { this.setState({ days: option }); }} style={headerOptionStyle}>
+      <TouchableOpacity key={option} onPress={() => { this.handleOptionClick(option); }} style={headerOptionStyle}>
         <Text style={this.renderOptionTextStyle(option)}>Last {option} days</Text>
       </TouchableOpacity>
     );
