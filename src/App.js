@@ -6,6 +6,7 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import Router from './Router';
+import Loading from './components/Loading';
 
 const store = createStore(
   reducers,
@@ -29,18 +30,8 @@ class App extends Component {
   }
 
   render() {
-    const { containerStyles, textStyle } = styles;
-
     if (!this.state.rehydrated) {
-      return (
-        <View style={containerStyles}>
-          <Text style={textStyle}>Accountabuddy</Text>
-          <ActivityIndicator
-            style={[styles.centering, { transform: [{ scale: 1.5 }] }]}
-            size="large"
-          />
-        </View>
-      );
+      return Loading;
     }
 
     return (
@@ -50,20 +41,5 @@ class App extends Component {
     );
   }
 }
-
-const styles = {
-  containerStyles: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#333',
-    paddingBottom: 200,
-  },
-  textStyle: {
-    textAlign: 'center',
-    color: '#fff',
-    fontSize: 26,
-    paddingBottom: 30,
-  },
-};
 
 export default App;

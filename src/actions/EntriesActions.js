@@ -12,6 +12,13 @@ export const createEntry = (entry) => {
   };
 };
 
+export const createSeedEntry = (entry) => {
+  return {
+    type: ADD_ENTRY,
+    payload: { ...entry, id: shortid.generate() },
+  };
+};
+
 export const deleteEntry = (id) => {
   return {
     type: DELETE_ENTRY,

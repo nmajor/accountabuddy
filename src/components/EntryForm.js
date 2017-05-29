@@ -53,7 +53,7 @@ class EntryForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    goals: state.goals,
+    goals: _.filter(state.goals, (goal) => { return goal.hide !== true; }),
     entries: state.entries,
   };
 };

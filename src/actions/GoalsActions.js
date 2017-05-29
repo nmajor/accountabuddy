@@ -3,6 +3,7 @@ import {
   ADD_GOAL,
   REMOVE_GOAL,
   HIDE_GOAL,
+  DELETE_ALL_GOALS,
 } from './types';
 
 export const createGoal = (goal) => {
@@ -23,5 +24,11 @@ export const hideGoal = (id) => {
   return {
     type: HIDE_GOAL,
     payload: id,
+  };
+};
+
+export const deleteAllGoals = () => {
+  return {
+    type: DELETE_ALL_GOALS,
   };
 };

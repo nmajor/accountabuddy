@@ -30,9 +30,13 @@ class EditGoals extends Component {
   }
   removeGoal(id) {
     const { entries } = this.props;
-    if (_.some(entries, (entry) => { return entry.goalId === id; })) {
+    console.log(id);
+    console.log(entries);
+    if (_.some(entries, (entry) => { return entry.results[id] !== undefined; })) {
+      console.log('hide goal now');
       this.props.hideGoal(id);
     } else {
+      console.log('remove goal now');
       this.props.removeGoal(id);
     }
   }
@@ -137,7 +141,7 @@ const styles = {
 const mapStateToProps = (state) => {
   return {
     entries: state.entries,
-    goals: state.goals,
+    goals: _.filter(state.goals, (goal) => { return goal.hide !== true; }),
   };
 };
 

@@ -122,9 +122,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { goals } = state;
-
-  return { goals };
+  return {
+    goals: _.filter(state.goals, (goal) => { return goal.hide !== true; }),
+  };
 };
 
 export default connect(mapStateToProps)(GoalHeatWidget);

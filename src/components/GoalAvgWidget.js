@@ -74,10 +74,8 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { goals } = state;
-
   return {
-    goals,
+    goals: _.filter(state.goals, (goal) => { return goal.hide !== true; }),
   };
 };
 
