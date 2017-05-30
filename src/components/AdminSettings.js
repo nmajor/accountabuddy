@@ -7,6 +7,8 @@ import { Actions } from 'react-native-router-flux';
 import { deleteAllEntries, deleteAllGoals, createSeedEntry } from '../actions';
 import _ from 'lodash';
 
+const entryValueWeightMap = [1, 2, 2, 2, 3, 3, 3];
+
 class Settings extends Component {
   constructor(props, context) {
     super(props, context);
@@ -52,7 +54,8 @@ class Settings extends Component {
   }
   generateRandomResults() {
     return this.props.goals.reduce((acc, goal) => {
-      acc[goal.id] = _.random(1, 3);
+      const randValIndex = _.random(0, (entryValueWeightMap.length - 1));
+      acc[goal.id] = entryValueWeightMap[randValIndex];
       return acc;
     }, {});
   }
