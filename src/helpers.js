@@ -96,7 +96,7 @@ function percentageOfColor(startHex, endHex, percentage) {
 }
 
 export const entryValueHex = (val) => {
-  val = parseInt(val, 10);
+  // val = parseInt(val, 10);
   if (val === 0) {
     return '#CCC';
   } else if (val >= 1 && val < 2) {

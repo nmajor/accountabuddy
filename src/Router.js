@@ -30,11 +30,11 @@ class RouterComponent extends Component {
         leftButtonIconStyle={{ tintColor: '#FFF' }}
       >
         <Scene key="welcome" sceneStyle={{ paddingTop: 0 }} component={Welcome} hideNavBar initial={this.isInitial('welcome')} />
-        <Scene key="home" component={Home} title="Accountabuddy" initial={this.isInitial('home')} />
-        <Scene key="entries" component={Entries} title="Accountabuddy" />
-        <Scene key="settings" component={AdminSettings} title="Accountabuddy" />
-        <Scene key="stats" component={Stats} title="Accountabuddy" />
-        <Scene key="signIn" component={SignIn} title="Accountabuddy" />
+        <Scene key="home" component={Home} title="Goal Bites" initial={this.isInitial('home')} />
+        <Scene key="entries" component={Entries} title="Goal Bites" />
+        <Scene key="settings" component={AdminSettings} title="Goal Bites" />
+        <Scene key="stats" component={Stats} title="Goal Bites" />
+        <Scene key="signIn" component={SignIn} title="Goal Bites" />
         <Scene key="newGoals" component={EditGoals} title="Goals" initial={this.isInitial('newGoals')} />
         <Scene key="editGoals" component={EditGoals} title="Edit Goals" />
       </Router>

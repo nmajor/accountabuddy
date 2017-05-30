@@ -19,7 +19,7 @@ const styles = {
 
 export default (
   <View style={styles.containerStyles}>
-    <Text style={styles.textStyle}>Accountabuddy</Text>
+    <Text style={styles.textStyle}>Goal Bites</Text>
     <ActivityIndicator
       style={[styles.centering, { transform: [{ scale: 1.5 }] }]}
       size="large"
