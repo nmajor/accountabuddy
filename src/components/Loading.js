@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator, Text } from 'react-native';
+import { View, ActivityIndicator, Text, StatusBar } from 'react-native';
 import { primaryColor } from '../styleVars';
 // import { Actions, ActionConst } from 'react-native-router-flux';
 
@@ -20,6 +20,9 @@ const styles = {
 
 export default (
   <View style={styles.containerStyles}>
+    <StatusBar
+      barStyle="dark-content"
+    />
     <Text style={styles.textStyle}>Meal Meter</Text>
     <ActivityIndicator
       style={[styles.centering, { transform: [{ scale: 1.5 }] }]}

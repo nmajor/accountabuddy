@@ -13,10 +13,6 @@ class Container extends Component {
 
     return (
       <View style={containerStyle}>
-        <StatusBar
-          backgroundColor="blue"
-          barStyle="light-content"
-        />
         <View style={bodyStyle}>
           {this.props.children}
         </View>
