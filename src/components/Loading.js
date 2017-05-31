@@ -1,17 +1,18 @@
 import React from 'react';
 import { View, ActivityIndicator, Text } from 'react-native';
+import { primaryColor } from '../styleVars';
 // import { Actions, ActionConst } from 'react-native-router-flux';
 
 const styles = {
   containerStyles: {
     flex: 1,
+    display: 'flex',
     justifyContent: 'center',
-    backgroundColor: '#333',
-    paddingBottom: 200,
+    backgroundColor: '#FFF',
   },
   textStyle: {
     textAlign: 'center',
-    color: '#fff',
+    color: primaryColor,
     fontSize: 26,
     paddingBottom: 30,
   },
@@ -22,6 +23,7 @@ export default (
     <Text style={styles.textStyle}>Meal Meter</Text>
     <ActivityIndicator
       style={[styles.centering, { transform: [{ scale: 1.5 }] }]}
+      color={primaryColor}
       size="large"
     />
   </View>
