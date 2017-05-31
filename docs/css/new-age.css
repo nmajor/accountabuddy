@@ -329,10 +329,8 @@ section.cta .overlay {
   top: 0;
   left: 0;
 }
-section.contact {
-  text-align: center;
-}
 section.contact h2 {
+  text-align: center;
   margin-top: 0;
   margin-bottom: 25px;
 }
