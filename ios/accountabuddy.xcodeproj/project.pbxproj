@@ -571,6 +571,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = Y5BF68GM6Q;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -987,6 +988,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Y5BF68GM6Q;
@@ -998,7 +1000,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nmajor.accountabuddy;
 				PRODUCT_NAME = accountabuddy;
+				PROVISIONING_PROFILE = "3706d1bb-5bc9-4e85-a9de-ccdeb7a715a4";
+				PROVISIONING_PROFILE_SPECIFIER = "Nmajor Accountabuddy";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1008,6 +1013,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y5BF68GM6Q;
 				INFOPLIST_FILE = accountabuddy/Info.plist;
@@ -1018,7 +1024,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nmajor.accountabuddy;
 				PRODUCT_NAME = accountabuddy;
+				PROVISIONING_PROFILE = "3706d1bb-5bc9-4e85-a9de-ccdeb7a715a4";
+				PROVISIONING_PROFILE_SPECIFIER = "Nmajor Accountabuddy";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
